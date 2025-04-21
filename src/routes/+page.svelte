@@ -1,5 +1,18 @@
-<h1>Welcome to SvelteKit</h1>
-<p>
-    Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a>
-    to read the documentation
-</p>
+<script lang="ts">
+    import ProductListing from '$lib/components/composites/product-listing/product-listing.svelte';
+    import { type PageData } from './$types';
+
+    interface Props {
+        data: PageData;
+    }
+
+    let { data }: Props = $props();
+</script>
+
+{#await data.productPromise}
+    <p>Loading...</p>
+{:then products}
+    <ProductListing {products} />
+{:catch error}
+    <p>Error: {error.message}</p>
+{/await}
