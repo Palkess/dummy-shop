@@ -9,6 +9,8 @@
     let { data }: Props = $props();
 </script>
 
+<h1 class="mb-8 text-5xl font-bold">Products</h1>
+
 {#await data.productPromise}
     <p>Loading...</p>
 {:then products}
