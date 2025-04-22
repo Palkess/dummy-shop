@@ -4,7 +4,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
     try {
-        const product = await ProductService.getProductBySlug(params.slug);
+        const product = await ProductService.getProductBySlugAsync(params.slug);
 
         return {
             product

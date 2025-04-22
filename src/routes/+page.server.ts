@@ -3,6 +3,6 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
     return {
-        productPromise: ProductService.getProducts()
+        productPromise: ProductService.getProductsAsync()
     };
 };
