@@ -32,6 +32,19 @@ export const ProductService = {
 
         return productCache.products;
     },
+    getProductBySlug: async (slug: string): Promise<Product> => {
+        // Ideally, we'd make an API request to get a single product by slug, but the Dummy JSON API doesn't support this.
+        // Instead, we'll either use our cached products or fetch all products and find the one with the matching slug.
+        let products = await ProductService.getProducts();
+
+        const product = products.find((product) => product.slug === slug);
+
+        if (!product) {
+            throw new Error(`Product with slug "${slug}" not found`);
+        }
+
+        return product;
+    },
     clearCache: () => {
         productCache = undefined;
     }
