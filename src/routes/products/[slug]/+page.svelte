@@ -1,6 +1,7 @@
 <script lang="ts">
     import { ArrowLeftIcon } from '@lucide/svelte';
     import { type PageData } from './$types';
+    import { page } from '$app/state';
 
     interface Props {
         data: PageData;
@@ -11,10 +12,12 @@
     let product = data.product;
 </script>
 
-<a class="mb-8 inline-flex items-center gap-2 text-2xl font-bold" href="/">
-    <ArrowLeftIcon />
-    Go back
-</a>
+{#if !page.state.selectedProduct}
+    <a class="mb-8 inline-flex items-center gap-2 text-2xl font-bold" href="/">
+        <ArrowLeftIcon />
+        Go back
+    </a>
+{/if}
 
 <div class="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
     <div class="sm:col-span-4 lg:col-span-5">
@@ -65,7 +68,11 @@
                 </p>
             </div>
 
-            <form onsubmit={(e) => alert('Added to cart!')}>
+            <form
+                onsubmit={(e) => {
+                    e.preventDefault();
+                }}
+                class="mt-6">
                 <div class="mt-6">
                     <button
                         type="submit"
