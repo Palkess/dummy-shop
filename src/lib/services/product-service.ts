@@ -17,7 +17,7 @@ const getProductsFromApi = async (): Promise<Product[]> => {
 };
 
 export const ProductService = {
-    getProducts: async (): Promise<Product[]> => {
+    getProductsAsync: async (): Promise<Product[]> => {
         if (productCache === undefined || new Date(productCache.validUntil) < new Date()) {
             // Fetch products from the API and cache them
             console.log('Fetching products from API...');
@@ -32,10 +32,10 @@ export const ProductService = {
 
         return productCache.products;
     },
-    getProductBySlug: async (slug: string): Promise<Product> => {
+    getProductBySlugAsync: async (slug: string): Promise<Product> => {
         // Ideally, we'd make an API request to get a single product by slug, but the Dummy JSON API doesn't support this.
         // Instead, we'll either use our cached products or fetch all products and find the one with the matching slug.
-        let products = await ProductService.getProducts();
+        let products = await ProductService.getProductsAsync();
 
         const product = products.find((product) => product.slug === slug);
 
