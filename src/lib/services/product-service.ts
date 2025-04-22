@@ -1,13 +1,14 @@
-import { STATIC_DUMMY_JSON_API_URL } from '$env/static/private';
 import type { Product, ProductResponse } from '$lib/types/dummy-json-api';
 import type { ProductCache } from '$lib/types/product-cache';
 import { slugify } from '$lib/utils/slugify';
+
+const DUMMY_JSON_API_URL = 'https://dummyjson.com/products';
 
 // Simple in-memory server cache for the products. In a real-world application, we'd use a more sophisticated caching strategy.
 let productCache: ProductCache | undefined = undefined;
 
 const getProductsFromApi = async (): Promise<Product[]> => {
-    const response = await fetch(STATIC_DUMMY_JSON_API_URL);
+    const response = await fetch(DUMMY_JSON_API_URL);
 
     if (!response.ok) {
         throw new Error('Failed to fetch products');
